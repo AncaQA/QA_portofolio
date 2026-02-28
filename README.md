@@ -14,6 +14,16 @@ I am learning software testing and test automation. This repository contains my 
 - Git version control
 
 ## Projects
+1. **Login Test Suite** - Comprehensive test cases for login functionality
+
+## Weekly Progress
+### Week 2
+- Test case design best practices
+- Defect life cycle understanding
+- Python error handling
+- JavaScript fundamentals (variables, functions, arrays)
+- Git version control basics
+- GitHub portfolio created
 
 1. **Login Test Suite** - Comprehensive test cases for login functionality
 ## Contact
