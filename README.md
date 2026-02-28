@@ -25,7 +25,6 @@ I am learning software testing and test automation. This repository contains my 
 - Git version control basics
 - GitHub portfolio created
 
-1. **Login Test Suite** - Comprehensive test cases for login functionality
 ## Contact
 - Email: petrariu.anca@gmail.com
 - LinkedIn: www.linkedin.com/in/anca-nistor-2012a198
