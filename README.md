@@ -29,3 +29,11 @@ I am learning software testing and test automation. This repository contains my 
 - Email: petrariu.anca@gmail.com
 - LinkedIn: www.linkedin.com/in/anca-nistor-2012a198
 - GitHub: AncaQA
+
+## Week 3 (March 2-8, 2026)
+- Risk-based testing and advanced dictionaries
+- Agile testing fundamentals
+- JavaScript objects mastered
+- EPAM test prep started
+- Testing theory gaps filled (Session 1)
+**Progress:** 10/112 days on main track + EPAM prep on track
