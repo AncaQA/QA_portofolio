@@ -1,5 +1,0 @@
-TC001,Login test,Pass
-TC002,Logout test,Pass
-TC003,Register test,Fail
-TC004,Search test,Pass
-TC005,Filter test,Fail

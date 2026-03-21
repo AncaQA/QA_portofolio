@@ -1,2 +1,0 @@
-TC003,Register test,Fail
-TC005,Filter test,Fail
