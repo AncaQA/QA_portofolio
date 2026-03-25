@@ -1,0 +1,39 @@
+{
+  "testSuite": "Login Tests",
+  "executionDate": "2026-03-10",
+  "totalTests": 5,
+  "passed": 4,
+  "failed": 1,
+  "tests": [
+    {
+      "id": "TC001",
+      "name": "Login with valid credentials",
+      "status": "Pass",
+      "duration": "2.5s"
+    },
+    {
+      "id": "TC002",
+      "name": "Login with invalid password",
+      "status": "Pass",
+      "duration": "1.8s"
+    },
+    {
+      "id": "TC003",
+      "name": "Login with empty username",
+      "status": "Fail",
+      "duration": "0.5s"
+    },
+    {
+      "id": "TC004",
+      "name": "Login with special characters",
+      "status": "Pass",
+      "duration": "2.1s"
+    },
+    {
+      "id": "TC005",
+      "name": "Logout after login",
+      "status": "Pass",
+      "duration": "1.2s"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+[
+ {"id": "TC001", "name": "Login with valid user", "priority": "High", "status": "Pass"},
+ {"id": "TC002", "name": "Login with invalid user", "priority": "High", "status": "Fail"},
+ {"id": "TC003", "name": "Register new user", "priority": "Medium", "status": "Pass"},
+ {"id": "TC004", "name": "Update profile", "priority": "Low", "status": "Fail"},
+ {"id": "TC005", "name": "Delete account", "priority": "Medium","status": "Pass"}
+]
