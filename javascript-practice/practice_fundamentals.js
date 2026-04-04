@@ -94,3 +94,11 @@
 // }
 // let result = greet(); // Prints "Hello"
 // console.log(result); // undefined
+
+// const test = [1, 2, 3, 4];
+// switch (test[x]) {
+// case 1: console.log(test);
+// break;
+// case 2: console.log(test);
+// break;
+// }
