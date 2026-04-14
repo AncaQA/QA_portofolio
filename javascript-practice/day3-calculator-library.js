@@ -109,22 +109,71 @@ console.log();
 
 const stringUtils = {
     capitalize: str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(), 
-    reverse: str => str.split('').reverse().join(''),
-
+    // reverse: str => str.split('').reverse().join(''),
+        reverse: str => {
+            let reversed = "";
+            for (let i = str.length - 1; i >= 0; i--){
+                reversed = reversed + str[i];
+            }
+            return reversed;
+        },
     isPalindrome: str => {
-        let cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
-        return cleaned === cleaned.split('').reverse().join('');
+        // let cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        let cleaned = str.toLowerCase();
+        let onlyLetters = "";
+        for (let i = 0; i < cleaned.length; i++) {
+            let char = cleaned[i];
+            if ((char >= 'a' && char <= 'z') || (char >= '0' && char <= '9')){
+                onlyLetters = onlyLetters + char;
+            }
+        }
+        let reversed = "";
+        for (let i = onlyLetters.length-1; i >= 0; i--){
+            reversed = reversed + onlyLetters[i];
+        }
+        return onlyLetters;
     },
-    wordCount: str => str.trim().split(/\s+/).length,
+    wordCount: str => {
+        let trimmed = str.trim();
+        if (trimmed === "") return 0;
+
+        let count = 1;
+        for (let i = 0; i < trimmed.length; i++) {
+            if (trimmed[i] === " " && trimmed [i - 1] !== " "){
+                count++;
+            }
+        }
+        return count;
+    },
 
     truncate: (str, length) => {
         if (str.length <= length) return str;
         return str.slice(0, length) + "...";
     },
     toTitleCase: str => {
-        return str.split(/\s+/)
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        .join(' ');
+        // return str.split(/\s+/)
+        // .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        // .join(' ');
+
+        let result ="";
+        let capitalizeNext = true;
+
+        for (let i = 0; i < str.length; i++) {
+            let char = str[i];
+
+            if (char === " ") {
+                result = result + char;
+                capitalizeNext = true;
+            } else {
+                if (capitalizeNext) {
+                    result = result + char.toUpperCase();
+                    capitalizeNext = false;
+                } else {
+                    result = result + char.toLowerCase();
+                }
+            }
+        }
+        return result;
     }
 };
 
@@ -139,23 +188,70 @@ console.log("Title case 'hello world' =", stringUtils.toTitleCase("hello   world
 // ===== ARRAY UTILITIES =====
 
 const arrayUtils = {
-    sum: arr => arr.reduce((total,num) => total + num, 0),
-    
-    average: arr => arrayUtils.sum(arr) / arr.length,
-    
-    max: arr => Math.max(...arr),
-    
-    min: arr => Math.min(...arr), 
-    
-    unique: arr => [...new Set(arr)],
-
-    shuffle: arr => {
-        let shuffled = [...arr];
-        for (let i = shuffled.length - 1; i > 0; i--){
-            let j = Math.floor(Math.random() * (i + 1)) ;
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    sum: arr => {
+        let total = 0;
+        for (let i = 0; i < arr.length; i++) {
+        total = total + arr[i];
         }
-        return shuffled;
+    return total;
+    },
+    
+    average: arr => {
+        if (arr.length === 0) return 0;
+        let total = 0;
+        for (let i = 0; i < arr.length; i++) {
+        total = total + arr[i];
+        }
+    return total / arr.length;
+    },
+    
+    max: arr => {
+        if (arr.length === 0) return undefined;
+        let maximum = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > maximum) {
+        maximum = arr[i];
+            }
+        }
+        return maximum;
+    },
+    
+    min: arr => {
+        if (arr.length === 0) return undefined;
+        let minimum = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < minimum) {
+        minimum = arr[i];
+            }
+        }
+        return minimum;
+    }, 
+    
+    unique: arr => {
+       let result = [];
+        for (let i = 0; i < arr.length; i++) {
+        let value = arr[i];
+        let isDuplicate = false; 
+
+        for (let j = 0; j < result.length; j++) {
+        if (result[j] === value) {
+        isDuplicate = true;
+        break;
+            }
+        }
+        if (!isDuplicate) {
+            result.push(value);
+        }
+        }
+        return result;
+    },
+
+    reverse: arr => {
+        let reversed = [];
+        for (let i = arr.length - 1; i >= 0; i--) {
+        reversed.push(arr[i]);
+        }
+        return reversed;
     },
 
     chunk: (arr, size) => {
@@ -176,7 +272,7 @@ console.log("Max:", arrayUtils.max(numbers));
 console.log("Min:", arrayUtils.min(numbers));
 console.log("Unique:", arrayUtils.unique(numbers));
 console.log("Chunk by 3:", arrayUtils.chunk(numbers, 3));
-console.log("Shuffled:", arrayUtils.shuffle(numbers));
+console.log("Reversed:", arrayUtils.reverse(numbers));
 console.log();
 
 // ===== FUNCTION GENERATORS =====
@@ -192,15 +288,46 @@ function createValidator(validationFn, errorMessage) {
     };
 }
 
-const isEmail = createValidator (
-    email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-    "Invalid email format"
-);
+function checkEmail(email) {
+if (!email.includes("@")) return false;
 
-const isStrongPassword = createValidator (
-    password => password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password), 
-    "Password must be 8+ chars with uppercase and number"
-);
+if (!email.includes(".")) return false;
+
+let atPos = email.indexOf("@");
+let dotPos = email.lastIndexOf(".");
+
+if (atPos >= dotPos) return false;
+return true;
+}
+
+function checkPassword(password) {
+    if (password.length < 8) return false;
+
+    let hasUpper = false;
+    for (let i = 0; i < password.length; i++) {
+    let char = password[i];
+    if (char >= 'A' && char <= 'Z') {
+    hasUpper = true;
+    break;
+    }
+}
+
+    if (!hasUpper) return false;
+
+    let hasNumber = false;
+    for (let i = 0; i < password.length; i++) {
+    let char = password[i];
+    if (char >= '0' && char <= '9') {
+    hasNumber = true;
+    break;
+    }
+}
+    if (!hasNumber) return false;
+    return true;
+}
+
+let isEmail = createValidator(checkEmail, "Invalid email format");
+let isStrongPassword = createValidator(checkPassword, "Password must be 8+ chars with lower case and upper case character");
 
 console.log("Validators:");
 console.log("Email 'test@exeample.com':", isEmail("test@email.com"));
